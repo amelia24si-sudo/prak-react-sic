@@ -16,6 +16,7 @@ export default function HelloWorld(){ //parent - component
 	            nama="Amelia Golisa" 
 	            nim="2457301013"
 	            tanggal={new Date().toLocaleDateString()}
+                usia="19"
 	          />
             <UserCard {...propsUserCard}/>
             {/* <GreetingBinjai/>
