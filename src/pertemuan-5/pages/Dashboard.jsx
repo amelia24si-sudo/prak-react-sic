@@ -1,5 +1,6 @@
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
+import ordersData from "../assets/orders.json";
 
 export default function Dashboard() {
     return (
@@ -52,6 +53,43 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+            </div>
+            <div className="p-5 mt-2">
+                <div className="p-6 bg-white rounded-lg shadow-md">
+                    <h2 className="mb-4 text-xl font-bold text-gray-800">Recent Orders</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead>
+                                <tr className="text-gray-500 border-b-2 border-gray-100">
+                                    <th className="py-3 pr-4 font-semibold">Order ID</th>
+                                    <th className="py-3 pr-4 font-semibold">Customer</th>
+                                    <th className="py-3 pr-4 font-semibold">Date</th>
+                                    <th className="py-3 font-semibold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* Lakukan Mapping Data JSON di sini */}
+                                {ordersData.map((order) => (
+                                    <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50">
+                                        <td className="py-3 font-medium text-blue-600">{order.id}</td>
+                                        <td className="py-3 text-gray-700">{order.customer}</td>
+                                        <td className="py-3 text-gray-500">{order.date}</td>
+                                        <td className="py-3">
+                                            {/* Kondisi warna badge berdasarkan status */}
+                                            <span className={`px-3 py-1 text-xs font-bold rounded-full ${
+                                                order.status === 'Delivered' ? 'text-green-700 bg-green-100' :
+                                                order.status === 'Pending' ? 'text-yellow-700 bg-yellow-100' :
+                                                'text-red-700 bg-red-100'
+                                            }`}>
+                                                {order.status}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );

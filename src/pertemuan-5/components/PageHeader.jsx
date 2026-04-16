@@ -1,3 +1,5 @@
+import { FaPlus } from "react-icons/fa";
+
 export default function PageHeader() {
     return (
         <div id="pageheader-container" className="flex items-center justify-between p-4">
@@ -14,8 +16,8 @@ export default function PageHeader() {
             </div>
 
             <div id="action-button">
-                <button id="add-button" className="px-4 py-2 text-white rounded-lg bg-hijau">
-                    Add Button
+               <button id="add-button" className="flex items-center px-4 py-2 text-white transition rounded-lg bg-hijau hover:bg-green-600 hover:shadow-md">
+                    <FaPlus className="mr-2" /> Add New Order
                 </button>
             </div>
         </div>
