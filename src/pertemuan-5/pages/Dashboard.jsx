@@ -67,6 +67,7 @@ export default function Dashboard() {
                                     <th className="py-3 font-semibold">Status</th>
                                 </tr>
                             </thead>
+                            
                             <tbody>
                                 {/* Lakukan Mapping Data JSON di sini */}
                                 {ordersData.map((order) => (
