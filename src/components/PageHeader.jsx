@@ -1,6 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 
-export default function PageHeader() {
+export default function PageHeader(props) {
     return (
         <div id="pageheader-container" className="flex items-center justify-between p-4">
             <div id="pageheader-left" className="flex flex-col">

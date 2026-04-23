@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import { Route, Routes } from 'react-router-dom';
 import Orders from './pages/Orders';
 import Customers from './pages/Customers';
-import NotFound from './pages/NotFound';
+import NotFound, { BadRequest, Forbidden, Unauthorized } from './pages/NotFound';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +23,9 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="400" element={<BadRequest />} />
+          <Route path="401" element={<Unauthorized />} />
+          <Route path="403" element={<Forbidden />} />
         </Routes>
       </div>
     </div>

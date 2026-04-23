@@ -2,6 +2,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
+import { MdOutlineNearbyError } from "react-icons/md";
 
 export default function Sidebar() {
     // Fungsi untuk mengatur styling NavLink secara dinamis
@@ -52,6 +53,36 @@ export default function Sidebar() {
                             className={menuClass}>
                             <IoPeopleCircleOutline className="mr-4 text-xl" />
                             <span>Customers</span>
+                        </NavLink>
+                    </li>
+
+                     <li>
+                        <NavLink
+                            id="menu-4"
+                            to="/400"
+                            className={menuClass}>
+                            <MdOutlineNearbyError className="mr-4 text-xl" />
+                            <span>400</span>
+                        </NavLink>
+                    </li>
+
+                     <li>
+                        <NavLink
+                            id="menu-5"
+                            to="/401"
+                            className={menuClass}>
+                            <MdOutlineNearbyError className="mr-4 text-xl" />
+                            <span>401</span>
+                        </NavLink>
+                    </li>
+
+                     <li>
+                        <NavLink
+                            id="menu-6"
+                            to="/403"
+                            className={menuClass}>
+                            <MdOutlineNearbyError className="mr-4 text-xl" />
+                            <span>403</span>
                         </NavLink>
                     </li>
                 </ul>
