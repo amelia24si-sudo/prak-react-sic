@@ -14,7 +14,7 @@ export default function Sidebar() {
         }`;
 
     return (
-        <div id="sidebar" className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg">
+        <div id="sidebar" className="flex h-screen w-90 flex-shrink-0 flex-col bg-white p-10 shadow-lg">
             {/* Logo */}
             <div id="sidebar-logo" className="flex flex-col">
                 <span id="logo-title" className="font-poppins text-[48px] text-gray-900">
@@ -26,7 +26,7 @@ export default function Sidebar() {
             </div>
 
             {/* List Menu */}
-            <div id="sidebar-menu" className="mt-10">
+            <div id="sidebar-menu" className="mt-5 ">
                 <ul id="menu-list" className="space-y-3">
                     <li>
                         <NavLink
@@ -55,41 +55,11 @@ export default function Sidebar() {
                             <span>Customers</span>
                         </NavLink>
                     </li>
-
-                     <li>
-                        <NavLink
-                            id="menu-4"
-                            to="/400"
-                            className={menuClass}>
-                            <MdOutlineNearbyError className="mr-4 text-xl" />
-                            <span>400</span>
-                        </NavLink>
-                    </li>
-
-                     <li>
-                        <NavLink
-                            id="menu-5"
-                            to="/401"
-                            className={menuClass}>
-                            <MdOutlineNearbyError className="mr-4 text-xl" />
-                            <span>401</span>
-                        </NavLink>
-                    </li>
-
-                     <li>
-                        <NavLink
-                            id="menu-6"
-                            to="/403"
-                            className={menuClass}>
-                            <MdOutlineNearbyError className="mr-4 text-xl" />
-                            <span>403</span>
-                        </NavLink>
-                    </li>
                 </ul>
             </div>
 
             {/* Footer */}
-            <div id="sidebar-footer" className="mt-auto">
+            <div id="sidebar-footer" className="mt-5">
                 <div id="footer-card" className="mb-10 flex items-center rounded-md bg-hijau px-4 py-3 shadow-lg">
                     <div id="footer-text" className="text-sm text-white">
                         <span>Please organize your menus through button below!</span>

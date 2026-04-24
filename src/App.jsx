@@ -14,9 +14,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div id="app-container" className="bg-gray-100 min-h-screen flex">
+    <div id="app-container" className="bg-gray-100 flex h-screen overflow-hidden">
       <Sidebar />
-      <div id="main-content" className="flex-1 p-4">
+      <div id="main-content" className="flex-1 p-4 h-full overflow-y-auto">
         <Header />
         <Routes>
           <Route path="/" element={<Dashboard />} />

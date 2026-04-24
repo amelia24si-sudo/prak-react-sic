@@ -1,55 +1,155 @@
-import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
+import { FaShoppingCart, FaTruck, FaBan, FaDollarSign, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
 import ordersData from "../assets/orders.json";
+import customersData from "../assets/customers.json";
 
 export default function Dashboard() {
+    // --- LOGIC STATISTIK ---
+    const totalOrders = ordersData.length;
+    const completedOrders = ordersData.filter(o => o.Status === "Completed").length;
+    const cancelledOrders = ordersData.filter(o => o.Status === "Cancelled").length;
+    const totalRevenue = ordersData.reduce((acc, order) => acc + (order["Total Price"] || 0), 0);
+    const totalCustomers = customersData.length;
+
+    // Helper Styling
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case 'Completed': return 'bg-green-100 text-green-800';
+            case 'Pending': return 'bg-blue-100 text-blue-800';
+            case 'Cancelled': return 'bg-red-100 text-red-800';
+            default: return 'bg-gray-100 text-gray-800';
+        }
+    };
+
+    const getLoyaltyStyle = (loyalty) => {
+        switch (loyalty) {
+            case 'Gold': return 'bg-yellow-100 text-yellow-800';
+            case 'Silver': return 'bg-gray-100 text-gray-800';
+            case 'Bronze': return 'bg-orange-100 text-orange-800';
+            default: return 'bg-blue-100 text-blue-800';
+        }
+    };
+
     return (
         <div id="dashboard-container">
-            <PageHeader />
+            <PageHeader title="Dashboard Overview" breadcrumb="Dashboard/Summary" />
 
-            <div id="dashboard-grid" className="grid gap-4 p-5 sm:grid-cols-2 md:grid-cols-4">
-
-                {/* Orders Card */}
-                <div id="dashboard-orders" className="flex items-center p-4 space-x-5 bg-white rounded-lg shadow-md flex-wrap">
-                    <div id="orders-icon" className="p-4 rounded-full bg-hijau">
-                        <FaShoppingCart className="size-7 text-white" />
-                    </div>
-                    <div id="orders-info" className="flex flex-col">
-                        <span id="orders-count" className="text-2xl font-bold flex-wrap">75</span>
-                        <span id="orders-text" className="text-gray-400 flex-wrap">Total Orders</span>
+            {/* --- KARTU STATISTIK --- */}
+            <div id="dashboard-grid" className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-4">
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                    <div className="flex items-center justify-between w-full">
+                        <div>
+                            <p className="text-xs font-bold text-gray-500 uppercase">Total Orders</p>
+                            <p className="text-2xl font-bold">{totalOrders}</p>
+                        </div>
+                        <div className="p-3 rounded-full bg-blue-600">
+                            <FaShoppingCart className="size-6 text-white" />
+                        </div>
                     </div>
                 </div>
 
-                {/* Delivered Card */}
-                <div id="dashboard-delivered" className="flex items-center p-4 space-x-5 bg-white rounded-lg shadow-md flex-wrap">
-                    <div id="delivered-icon" className="p-4 rounded-full bg-biru">
-                        <FaTruck className="size-7 text-white" />
-                    </div>
-                    <div id="delivered-info" className="flex flex-col">
-                        <span id="delivered-count" className="text-2xl font-bold flex-wrap">175</span>
-                        <span id="delivered-text" className="text-gray-400 flex-wrap">Total Delivered</span>
-                    </div>
-                </div>
-
-                {/* Canceled Card */}
-                <div id="dashboard-canceled" className="flex items-center p-4 space-x-5 bg-white rounded-lg shadow-md flex-wrap">
-                    <div id="canceled-icon" className="p-4 rounded-full bg-merah">
-                        <FaBan className="size-7 text-white" />
-                    </div>
-                    <div id="canceled-info" className="flex flex-col">
-                        <span id="canceled-count" className="text-2xl font-bold flex-wrap">40</span>
-                        <span id="canceled-text" className="text-gray-400 flex-wrap">Total Canceled</span>
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                    <div className="flex items-center justify-between w-full">
+                        <div>
+                            <p className="text-xs font-bold text-gray-500 uppercase">Delivered</p>
+                            <p className="text-2xl font-bold">{completedOrders}</p>
+                        </div>
+                        <div className="p-3 rounded-full bg-green-600">
+                            <FaTruck className="size-6 text-white" />
+                        </div>
                     </div>
                 </div>
 
-                {/* Revenue Card */}
-                <div id="dashboard-revenue" className="flex items-center p-4 space-x-5 bg-white rounded-lg shadow-md flex-wrap">
-                    <div id="revenue-icon" className="p-4 rounded-full bg-kuning">
-                        <FaDollarSign className="size-7 text-white" />
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                    <div className="flex items-center justify-between w-full">
+                        <div>
+                            <p className="text-xs font-bold text-gray-500 uppercase">Cancelled</p>
+                            <p className="text-2xl font-bold">{cancelledOrders}</p>
+                        </div>
+                        <div className="p-3 rounded-full bg-red-600">
+                            <FaBan className="size-6 text-white" />
+                        </div>
                     </div>
-                    <div id="revenue-info" className="flex flex-col">
-                        <span id="revenue-amount" className="text-2xl font-bold flex-wrap">Rp.128</span>
-                        <span id="revenue-text" className="text-gray-400">Total Revenue</span>
+                </div>
+
+                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                    <div className="flex items-center justify-between w-full">
+                        <div>
+                            <p className="text-xs font-bold text-gray-500 uppercase">Total Revenue</p>
+                            <p className="text-xl font-bold">Rp {totalRevenue.toLocaleString('id-ID')}</p>
+                        </div>
+                        <div className="p-3 rounded-full bg-yellow-500">
+                            <FaDollarSign className="size-6 text-white" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- BAGIAN TABEL DATA --- */}
+            <div className="grid grid-cols-0 lg:grid-cols-2 gap-8">
+                
+                {/* Tabel Ringkasan Pesanan */}
+                <div className="bg-white rounded-xl shadow overflow-hidden">
+                    <div className="p-2 border-b border-gray-100 bg-gray-50/50">
+                        <h3 className="font-bold text-gray-700">Recent Orders</h3>
+                    </div>
+                    <div className="overflow-y-auto max-h-[370px]">
+                        <table className="min-w-full leading-normal text-left">
+                            <thead className="sticky top-0 bg-white z-10 shadow-sm">
+                                <tr>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Order ID</th>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Customer</th>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {ordersData.map((order) => (
+                                    <tr key={order["Order ID"]} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                        <td className="px-5 py-4 text-sm font-bold text-blue-600">{order["Order ID"]}</td>
+                                        <td className="px-5 py-4 text-sm text-gray-800 font-medium">{order["Customer Name"]}</td>
+                                        <td className="px-5 py-4 text-sm">
+                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getStatusStyle(order.Status)}`}>
+                                                {order.Status}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {/* Tabel Ringkasan Pelanggan */}
+                <div className="bg-white rounded-xl shadow overflow-hidden">
+                    <div className="p-2 border-b border-gray-100 bg-gray-50/50">
+                        <h3 className="font-bold text-gray-700">Customer Directory</h3>
+                    </div>
+                    <div className="overflow-y-auto max-h-[370px]">
+                        <table className="min-w-full leading-normal text-left">
+                            <thead className="sticky top-0 bg-white z-10 shadow-sm">
+                                <tr>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Customer</th>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Loyalty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {customersData.map((customer) => (
+                                    <tr key={customer["Customer ID"]} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                        <td className="px-5 py-4 text-sm">
+                                            <div className="flex items-center">
+                                                <FaUserCircle className="mr-2 text-gray-400 text-lg" />
+                                                <span className="font-semibold text-gray-800">{customer["Customer Name"]}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-5 py-4 text-sm">
+                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getLoyaltyStyle(customer.Loyalty)}`}>
+                                                {customer.Loyalty}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

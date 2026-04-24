@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // Pastikan menggunakan react-router un
 
 export default function NotFound() {
   return (
-    <div className=" flex flex-col items-center justify-center p-44 text-center">
+    <div className=" flex flex-col items-center justify-center p-0 text-center">
       {/* Container Gambar/Ikon 404 */}
       <div className="relative mb-8">
         {/* Tali Penggantung */}
@@ -43,7 +43,7 @@ export default function NotFound() {
 
 export function BadRequest() {
   return (
-    <div className="flex flex-col items-center justify-center p-44 text-center">
+    <div className="flex flex-col items-center justify-center p-0 text-center">
       <div className="relative mb-8">
         <div className="w-1 h-16 bg-gray-800 mx-auto rounded-full"></div>
         <div className="bg-white border-4 border-gray-800 px-12 py-6 rounded-lg shadow-[8px_8px_0px_rgba(0,0,0,0.1)] relative transform rotate-2">
@@ -68,7 +68,7 @@ export function BadRequest() {
 
 export function Unauthorized() {
   return (
-    <div className="flex flex-col items-center justify-center p-44 text-center">
+    <div className="flex flex-col items-center justify-center p-0 text-center">
       <div className="relative mb-8">
         <div className="w-1 h-16 bg-gray-800 mx-auto rounded-full"></div>
         <div className="bg-white border-4 border-gray-800 px-12 py-6 rounded-lg shadow-[8px_8px_0px_rgba(0,0,0,0.1)] relative transform -rotate-1">
@@ -93,7 +93,7 @@ export function Unauthorized() {
 
 export function Forbidden() {
   return (
-    <div className="flex flex-col items-center justify-center p-44 text-center">
+    <div className="flex flex-col items-center justify-center p-0 text-center">
       <div className="relative mb-8">
         <div className="w-1 h-16 bg-gray-800 mx-auto rounded-full"></div>
         <div className="bg-white border-4 border-gray-800 px-12 py-6 rounded-lg shadow-[8px_8px_0px_rgba(0,0,0,0.1)] relative transform rotate-3">
