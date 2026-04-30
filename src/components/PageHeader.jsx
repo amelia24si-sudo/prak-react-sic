@@ -10,7 +10,7 @@ export default function PageHeader(props) {
                 </span>
                 
                 <div id="breadcrumb-links" className="flex items-center mt-2 space-x-2 font-medium">
-                    <span id="breadcrumb-home" className="text-gray-500">{props.breadcrumb}</span>
+                    <span id="breadcrumb-home" className="text-gray-500">{props.breadcrumb1}</span>
                 </div>
             </div>
 
@@ -20,7 +20,7 @@ export default function PageHeader(props) {
                     id="add-button" 
                     className="flex items-center px-4 py-2 text-white transition rounded-lg bg-hijau hover:bg-green-600 hover:shadow-md inline-block"
                 >
-                    <FaPlus className="mr-2 inline" /> Add New Order
+                    <FaPlus className="mr-2 inline" /> {props.breadcrumb2}
                 </Link>
             </div>
         </div>

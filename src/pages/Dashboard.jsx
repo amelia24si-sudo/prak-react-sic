@@ -32,7 +32,7 @@ export default function Dashboard() {
 
     return (
         <div id="dashboard-container">
-            <PageHeader title="Dashboard Overview" breadcrumb="Dashboard/Summary" />
+            <PageHeader title="Dashboard Overview" breadcrumb1="Dashboard/Summary" breadcrumb2="Add New Order" />
 
             {/* --- KARTU STATISTIK --- */}
             <div id="dashboard-grid" className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-4">

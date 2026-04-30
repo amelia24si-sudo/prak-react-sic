@@ -21,7 +21,7 @@ export default function Orders() {
 
     return (
         <div id="dashboard-container">
-            <PageHeader title="Order Management" breadcrumb={`Mengelola ${ordersData.length} pesanan`} />
+            <PageHeader title="Order Management" breadcrumb1={`Mengelola ${ordersData.length} pesanan`} breadcrumb2="Add New Order" />
 
             {/* Statistik Ringkas */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

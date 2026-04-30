@@ -19,7 +19,7 @@ export default function Customers() {
 
     return (
         <div id="dashboard-container">
-            <PageHeader title="Customer Directory" breadcrumb={`Mengelola ${totalCustomers} basis data pelanggan`} />
+            <PageHeader title="Customer Directory" breadcrumb1={`Mengelola ${totalCustomers} basis data pelanggan`} breadcrumb2="Add New Customer" />
 
             {/* Statistik Ringkas (Style identik dengan Orders) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
