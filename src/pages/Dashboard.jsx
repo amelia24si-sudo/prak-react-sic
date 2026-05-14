@@ -40,6 +40,7 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <p className="text-xs font-bold text-gray-500 uppercase">Total Orders</p>
+                            <p>halo saya, amelia</p>
                             <p className="text-2xl font-bold">{totalOrders}</p>
                         </div>
                         <div className="p-3 rounded-full bg-blue-600">
