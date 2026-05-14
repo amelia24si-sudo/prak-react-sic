@@ -1,0 +1,272 @@
+[
+    {
+        "id": 1,
+        "title": "UltraVision 4K TV",
+        "code": "TV-001",
+        "category": "Electronics",
+        "brand": "Lumixia",
+        "price": 12000000,
+        "stock": 15
+    },
+    {
+        "id": 2,
+        "title": "SoundMaster Pro Headphones",
+        "code": "AUD-002",
+        "category": "Audio",
+        "brand": "Sonic",
+        "price": 2500000,
+        "stock": 45
+    },
+    {
+        "id": 3,
+        "title": "ErgoClick Mechanical Keyboard",
+        "code": "ACC-003",
+        "category": "Accessories",
+        "brand": "TypeFast",
+        "price": 850000,
+        "stock": 30
+    },
+    {
+        "id": 4,
+        "title": "SwiftBook Air 13",
+        "code": "LAP-004",
+        "category": "Computers",
+        "brand": "Aura",
+        "price": 15000000,
+        "stock": 10
+    },
+    {
+        "id": 5,
+        "title": "PhotoPro DSLR Z5",
+        "code": "CAM-005",
+        "category": "Cameras",
+        "brand": "Optic",
+        "price": 22000000,
+        "stock": 8
+    },
+    {
+        "id": 6,
+        "title": "HydroFlask 32oz",
+        "code": "DW-006",
+        "category": "Lifestyle",
+        "brand": "Aqua",
+        "price": 450000,
+        "stock": 100
+    },
+    {
+        "id": 7,
+        "title": "Titan Smartwatch G2",
+        "code": "WEAR-007",
+        "category": "Electronics",
+        "brand": "Titan",
+        "price": 3200000,
+        "stock": 25
+    },
+    {
+        "id": 8,
+        "title": "CloudWalk Running Shoes",
+        "code": "FTW-008",
+        "category": "Apparel",
+        "brand": "Strider",
+        "price": 1200000,
+        "stock": 60
+    },
+    {
+        "id": 9,
+        "title": "BrewPerfect Coffee Maker",
+        "code": "APP-009",
+        "category": "Appliances",
+        "brand": "JavaJoy",
+        "price": 1800000,
+        "stock": 20
+    },
+    {
+        "id": 10,
+        "title": "GamerX Pad Pro",
+        "code": "ACC-010",
+        "category": "Accessories",
+        "brand": "GamerX",
+        "price": 300000,
+        "stock": 150
+    },
+    {
+        "id": 11,
+        "title": "PureAir Purifier V3",
+        "code": "APP-011",
+        "category": "Appliances",
+        "brand": "CleanLife",
+        "price": 2750000,
+        "stock": 12
+    },
+    {
+        "id": 12,
+        "title": "Velocita Road Bike",
+        "code": "SPO-012",
+        "category": "Sports",
+        "brand": "Velocita",
+        "price": 8900000,
+        "stock": 5
+    },
+    {
+        "id": 13,
+        "title": "Lumina Desk Lamp",
+        "code": "HOME-013",
+        "category": "Furniture",
+        "brand": "Lumina",
+        "price": 350000,
+        "stock": 80
+    },
+    {
+        "id": 14,
+        "title": "PowerBank 20k mAh",
+        "code": "ACC-014",
+        "category": "Accessories",
+        "brand": "Volt",
+        "price": 550000,
+        "stock": 200
+    },
+    {
+        "id": 15,
+        "title": "Nova 5G Smartphone",
+        "code": "MOB-015",
+        "category": "Electronics",
+        "brand": "Nova",
+        "price": 7500000,
+        "stock": 18
+    },
+    {
+        "id": 16,
+        "title": "ChefCut Knife Set",
+        "code": "KIT-016",
+        "category": "Kitchen",
+        "brand": "ChefCut",
+        "price": 1100000,
+        "stock": 40
+    },
+    {
+        "id": 17,
+        "title": "DeepBass Subwoofer",
+        "code": "AUD-017",
+        "category": "Audio",
+        "brand": "Sonic",
+        "price": 4200000,
+        "stock": 14
+    },
+    {
+        "id": 18,
+        "title": "Rugged Pack 40L",
+        "code": "BAG-018",
+        "category": "Travel",
+        "brand": "Trek",
+        "price": 950000,
+        "stock": 55
+    },
+    {
+        "id": 19,
+        "title": "FocusLens 50mm",
+        "code": "CAM-019",
+        "category": "Cameras",
+        "brand": "Optic",
+        "price": 3800000,
+        "stock": 22
+    },
+    {
+        "id": 20,
+        "title": "SoftSleep Pillow",
+        "code": "BED-020",
+        "category": "Furniture",
+        "brand": "Cloud9",
+        "price": 250000,
+        "stock": 120
+    },
+    {
+        "id": 21,
+        "title": "ActiveTab 10",
+        "code": "TAB-021",
+        "category": "Electronics",
+        "brand": "Aura",
+        "price": 4900000,
+        "stock": 35
+    },
+    {
+        "id": 22,
+        "title": "IronMuscle Dumbbell 5kg",
+        "code": "SPO-022",
+        "category": "Sports",
+        "brand": "Iron",
+        "price": 200000,
+        "stock": 90
+    },
+    {
+        "id": 23,
+        "title": "EcoBreeze Standing Fan",
+        "code": "APP-023",
+        "category": "Appliances",
+        "brand": "CleanLife",
+        "price": 650000,
+        "stock": 45
+    },
+    {
+        "id": 24,
+        "title": "SilkTouch Mousepad",
+        "code": "ACC-024",
+        "category": "Accessories",
+        "brand": "GamerX",
+        "price": 150000,
+        "stock": 300
+    },
+    {
+        "id": 25,
+        "title": "NightOwl Security Cam",
+        "code": "SEC-025",
+        "category": "Electronics",
+        "brand": "SafeHome",
+        "price": 1300000,
+        "stock": 28
+    },
+    {
+        "id": 26,
+        "title": "ZenYoga Mat",
+        "code": "SPO-026",
+        "category": "Sports",
+        "brand": "Zen",
+        "price": 400000,
+        "stock": 75
+    },
+    {
+        "id": 27,
+        "title": "SteelSeries Gaming Mouse",
+        "code": "ACC-027",
+        "category": "Accessories",
+        "brand": "TypeFast",
+        "price": 950000,
+        "stock": 50
+    },
+    {
+        "id": 28,
+        "title": "GlowSkin Face Serum",
+        "code": "BEAU-028",
+        "category": "Beauty",
+        "brand": "Glow",
+        "price": 220000,
+        "stock": 110
+    },
+    {
+        "id": 29,
+        "title": "TerraTent 4-Person",
+        "code": "OUT-029",
+        "category": "Travel",
+        "brand": "Trek",
+        "price": 2500000,
+        "stock": 7
+    },
+    {
+        "id": 30,
+        "title": "Pulse Fitness Tracker",
+        "code": "WEAR-030",
+        "category": "Electronics",
+        "brand": "Titan",
+        "price": 1100000,
+        "stock": 65
+    }
+]

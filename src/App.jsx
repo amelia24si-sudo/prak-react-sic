@@ -7,11 +7,13 @@ import React from 'react';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 import Loading from './components/Loading';
+import Products from './pages/Products';
 
 // 2. Lazy Load untuk Halaman Utama & Auth (Default Exports)
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
+const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
 const Login = React.lazy(() => import("./pages/Auth/Login"));
 const Register = React.lazy(() => import("./pages/Auth/Register"));
 const Forgot = React.lazy(() => import("./pages/Auth/Forgot"));
@@ -34,6 +36,8 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path="400" element={<BadRequest />} />
           <Route path="401" element={<Unauthorized />} />
