@@ -2,6 +2,7 @@ import { useState } from "react"; // Tambahkan useState
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import productsData from "../assets/products.json";
+import Container from "../components/Container";
 
 export default function Products() {
     // 1. State untuk menyimpan kata kunci pencarian
@@ -13,7 +14,7 @@ export default function Products() {
     );
 
     return (
-        <div>
+        <Container>
             <PageHeader title="Products" breadcrumb1="Dashboard" breadcrumb2="Product List" />
 
             {/* Input Search - Sesuai style gambar */}
@@ -66,6 +67,6 @@ export default function Products() {
                     </table>
                 </div>
             </div>
-        </div>
+        </Container>
     );
 }

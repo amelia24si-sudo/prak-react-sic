@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 export default function PageHeader(props) {
     return (
@@ -15,13 +16,13 @@ export default function PageHeader(props) {
             </div>
 
             <div id="action-button">
-                <Link 
+                <Button
                     to="/400" 
                     id="add-button" 
-                    className="flex items-center px-4 py-2 text-white transition rounded-lg bg-hijau hover:bg-green-600 hover:shadow-md inline-block"
+                    type="success"
                 >
                     <FaPlus className="mr-2 inline" /> {props.breadcrumb2}
-                </Link>
+                </Button>
             </div>
         </div>
     );

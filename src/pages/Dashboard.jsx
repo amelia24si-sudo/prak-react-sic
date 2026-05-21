@@ -2,6 +2,8 @@ import { FaShoppingCart, FaTruck, FaBan, FaDollarSign, FaCalendarAlt, FaUserCirc
 import PageHeader from "../components/PageHeader";
 import ordersData from "../assets/orders.json";
 import customersData from "../assets/customers.json";
+import Container from "../components/Container";
+import Card from "../components/Card";
 
 export default function Dashboard() {
     // --- LOGIC STATISTIK ---
@@ -31,25 +33,24 @@ export default function Dashboard() {
     };
 
     return (
-        <div id="dashboard-container">
+        <Container id="dashboard-container">
             <PageHeader title="Dashboard Overview" breadcrumb1="Dashboard/Summary" breadcrumb2="Add New Order" />
 
             {/* --- KARTU STATISTIK --- */}
             <div id="dashboard-grid" className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-4">
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                <Card className="flex items-center p-4 bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <p className="text-xs font-bold text-gray-500 uppercase">Total Orders</p>
-                            <p>halo saya, amelia</p>
                             <p className="text-2xl font-bold">{totalOrders}</p>
                         </div>
                         <div className="p-3 rounded-full bg-blue-600">
                             <FaShoppingCart className="size-6 text-white" />
                         </div>
                     </div>
-                </div>
+                </Card>
 
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                <Card className="flex items-center p-4 bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <p className="text-xs font-bold text-gray-500 uppercase">Delivered</p>
@@ -59,9 +60,9 @@ export default function Dashboard() {
                             <FaTruck className="size-6 text-white" />
                         </div>
                     </div>
-                </div>
+                </Card>
 
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                <Card className="flex items-center p-4 bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <p className="text-xs font-bold text-gray-500 uppercase">Cancelled</p>
@@ -71,9 +72,9 @@ export default function Dashboard() {
                             <FaBan className="size-6 text-white" />
                         </div>
                     </div>
-                </div>
+                </Card>
 
-                <div className="flex items-center p-4 bg-white rounded-lg shadow-md">
+                <Card className="flex items-center p-4 bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <p className="text-xs font-bold text-gray-500 uppercase">Total Revenue</p>
@@ -83,7 +84,7 @@ export default function Dashboard() {
                             <FaDollarSign className="size-6 text-white" />
                         </div>
                     </div>
-                </div>
+                </Card>
             </div>
 
             {/* --- BAGIAN TABEL DATA --- */}
@@ -155,6 +156,6 @@ export default function Dashboard() {
                 </div>
 
             </div>
-        </div>
+        </Container>
     );
 }

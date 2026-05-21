@@ -64,6 +64,15 @@ export default function Sidebar() {
                             <span>Products</span>
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink
+                            id="menu-5"
+                            to="/components"
+                            className={menuClass}>
+                            <IoPeopleCircleOutline className="mr-4 text-xl" />
+                            <span>Components</span>
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
 

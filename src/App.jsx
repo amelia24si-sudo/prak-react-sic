@@ -11,6 +11,7 @@ import Products from './pages/Products';
 
 // 2. Lazy Load untuk Halaman Utama & Auth (Default Exports)
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+const Components = React.lazy(() => import("./pages/Components"));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail"));
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/components" element={<Components />} />
           <Route path="*" element={<NotFound />} />
           <Route path="400" element={<BadRequest />} />
           <Route path="401" element={<Unauthorized />} />
