@@ -1,3 +1,4 @@
+import { MdFeaturedPlayList } from "react-icons/md"; 
 import { FaProductHunt } from "react-icons/fa"; 
 import { CgComponents } from "react-icons/cg"; 
 import { FaShoppingCart } from "react-icons/fa";
@@ -73,6 +74,15 @@ export default function Sidebar() {
                             className={menuClass}>
                             <CgComponents className="mr-4 text-xl" />
                             <span>Components</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            id="menu-5"
+                            to="/fiturxyz"
+                            className={menuClass}>
+                            <MdFeaturedPlayList className="mr-4 text-xl" />
+                            <span>Fitur xyz</span>
                         </NavLink>
                     </li>
                 </ul>

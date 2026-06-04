@@ -24,7 +24,7 @@ export default function Orders() {
     const headers = ["orderID", "Customer", "Date", "Total Price", "Status"]
 
     return (
-        <Container id="dashboard-container">
+        <Container id="orders-container">
             <PageHeader title="Order Management" breadcrumb1={`Mengelola ${ordersData.length} pesanan`} breadcrumb2="Add New Order" />
 
             {/* Statistik Ringkas */}

@@ -9,7 +9,7 @@ export default function Customers() {
     const goldMembers = customersData.filter(c => c.Loyalty === "Gold").length;
 
     return (
-        <Container id="dashboard-container" className="p-6">
+        <Container id="customers-container" className="p-6">
 
             <div id="pageheader-container" className="flex items-center justify-between p-4">
                 <div id="pageheader-left" className="flex flex-col">

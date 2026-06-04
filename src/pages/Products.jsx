@@ -14,7 +14,7 @@ export default function Products() {
     );
 
     return (
-        <Container>
+        <Container id="products-container">
             <PageHeader title="Products" breadcrumb1="Dashboard" breadcrumb2="Product List" />
 
             {/* Input Search - Sesuai style gambar */}
