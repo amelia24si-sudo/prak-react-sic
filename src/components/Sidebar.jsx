@@ -1,3 +1,5 @@
+import { FaProductHunt } from "react-icons/fa"; 
+import { CgComponents } from "react-icons/cg"; 
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
@@ -60,7 +62,7 @@ export default function Sidebar() {
                             id="menu-4"
                             to="/products"
                             className={menuClass}>
-                            <IoPeopleCircleOutline className="mr-4 text-xl" />
+                            <FaProductHunt className="mr-4 text-xl" />
                             <span>Products</span>
                         </NavLink>
                     </li>
@@ -69,7 +71,7 @@ export default function Sidebar() {
                             id="menu-5"
                             to="/components"
                             className={menuClass}>
-                            <IoPeopleCircleOutline className="mr-4 text-xl" />
+                            <CgComponents className="mr-4 text-xl" />
                             <span>Components</span>
                         </NavLink>
                     </li>
