@@ -79,7 +79,7 @@ export default function Orders() {
             </div>
 
             {/* Tabel Orders dengan Scroll Independen */}
-            <div className="bg-white rounded-xl shadow overflow-hidden">
+            <div className="overflow-x-auto bg-white rounded-lg shadow">
                 <div className="overflow-x-auto overflow-y-auto max-h-[390px]">
                     <Table headers={headers}>
                         {ordersData.map((order) => (
