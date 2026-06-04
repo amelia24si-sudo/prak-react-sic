@@ -25,7 +25,7 @@ export default function Customers() {
             </div>
 
             {/* Statistik Singkat */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <Card className="flex items-center p-4 space-x-5 bg-white rounded-lg shadow-md flex-wrap">
                     <FaUserTag className="text-blue-600 mr-3 size-6" />
                     <div>

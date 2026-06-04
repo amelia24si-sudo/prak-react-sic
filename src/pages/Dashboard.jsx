@@ -37,7 +37,7 @@ export default function Dashboard() {
             <PageHeader title="Dashboard Overview" breadcrumb1="Dashboard/Summary" breadcrumb2="Add New Order" />
 
             {/* --- KARTU STATISTIK --- */}
-            <div id="dashboard-grid" className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-4">
+            <div id="dashboard-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <Card className="flex items-center p-4 bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between w-full">
                         <div>
