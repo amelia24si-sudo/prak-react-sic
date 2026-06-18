@@ -85,6 +85,15 @@ export default function Sidebar() {
                             <span>Fitur xyz</span>
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink
+                            id="menu-5"
+                            to="/notes"
+                            className={menuClass}>
+                            <MdFeaturedPlayList className="mr-4 text-xl" />
+                            <span>Notes</span>
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
 

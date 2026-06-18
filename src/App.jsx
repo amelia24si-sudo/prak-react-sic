@@ -9,6 +9,7 @@ import AuthLayout from './layouts/AuthLayout';
 import Loading from './components/Loading';
 import Products from './pages/Products';
 import Fiturxyz from './pages/Fiturxyz';
+import Notes from './pages/Notes';
 
 
 // 2. Lazy Load untuk Halaman Utama & Auth (Default Exports)
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/components" element={<Components />} />
           <Route path="/fiturxyz" element={<Fiturxyz/>} />
+          <Route path="/notes" element={<Notes/>} />
           <Route path="*" element={<NotFound />} />
           <Route path="400" element={<BadRequest />} />
           <Route path="401" element={<Unauthorized />} />
