@@ -1,16 +1,50 @@
+import { useEffect, useState } from "react";
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign, FaCalendarAlt, FaUserCircle } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
-import ordersData from "../assets/orders.json";
-import customersData from "../assets/customers.json";
+import { ordersAPI, profilesAPI } from "../services/supabaseService.js";
 import Container from "../components/Container";
 import Card from "../components/Card";
 
 export default function Dashboard() {
-    // --- LOGIC STATISTIK ---
+    const [ordersData, setOrdersData] = useState([]);
+    const [customersData, setCustomersData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            setError("");
+
+            const [ordersResult, profilesResult] = await Promise.all([
+                ordersAPI.fetchOrders(),
+                profilesAPI.fetchProfiles(),
+            ]);
+
+            if (ordersResult.error) {
+                setError(ordersResult.error.message || "Gagal memuat pesanan.");
+                setOrdersData([]);
+            } else {
+                setOrdersData(ordersResult.data || []);
+            }
+
+            if (profilesResult.error) {
+                setError((prev) => prev ? `${prev} ${profilesResult.error.message}` : profilesResult.error.message || "Gagal memuat profil pelanggan.");
+                setCustomersData([]);
+            } else {
+                setCustomersData(profilesResult.data || []);
+            }
+
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
+
     const totalOrders = ordersData.length;
-    const completedOrders = ordersData.filter(o => o.Status === "Completed").length;
-    const cancelledOrders = ordersData.filter(o => o.Status === "Cancelled").length;
-    const totalRevenue = ordersData.reduce((acc, order) => acc + (order["Total Price"] || 0), 0);
+    const completedOrders = ordersData.filter((o) => (o.status || o.Status) === "Completed").length;
+    const cancelledOrders = ordersData.filter((o) => (o.status || o.Status) === "Cancelled").length;
+    const totalRevenue = ordersData.reduce((acc, order) => acc + (order.total_amount || order["Total Amount"] || 0), 0);
     const totalCustomers = customersData.length;
 
     // Helper Styling
@@ -88,7 +122,7 @@ export default function Dashboard() {
             </div>
 
             {/* --- BAGIAN TABEL DATA --- */}
-            <div className="grid grid-cols-0 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 {/* Tabel Ringkasan Pesanan */}
                 <div className="bg-white rounded-xl shadow overflow-hidden">
@@ -100,18 +134,18 @@ export default function Dashboard() {
                             <thead className="sticky top-0 bg-white z-10 shadow-sm">
                                 <tr>
                                     <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Order ID</th>
-                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Customer</th>
+                                    <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Order Date</th>
                                     <th className="px-5 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {ordersData.map((order) => (
-                                    <tr key={order["Order ID"]} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                                        <td className="px-5 py-4 text-sm font-bold text-blue-600">{order["Order ID"]}</td>
-                                        <td className="px-5 py-4 text-sm text-gray-800 font-medium">{order["Customer Name"]}</td>
+                                    <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                        <td className="px-5 py-4 text-sm font-bold text-blue-600">#{order.id}</td>
+                                        <td className="px-5 py-4 text-sm text-gray-800 font-medium">{order.created_at ?? order["Created At"] ?? "-"}</td>
                                         <td className="px-5 py-4 text-sm">
-                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getStatusStyle(order.Status)}`}>
-                                                {order.Status}
+                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getStatusStyle(order.status || order.Status)}`}>
+                                                {order.status || order.Status || "Unknown"}
                                             </span>
                                         </td>
                                     </tr>
@@ -136,16 +170,16 @@ export default function Dashboard() {
                             </thead>
                             <tbody>
                                 {customersData.map((customer) => (
-                                    <tr key={customer["Customer ID"]} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                    <tr key={customer.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <td className="px-5 py-4 text-sm">
                                             <div className="flex items-center">
                                                 <FaUserCircle className="mr-2 text-gray-400 text-lg" />
-                                                <span className="font-semibold text-gray-800">{customer["Customer Name"]}</span>
+                                                <span className="font-semibold text-gray-800">{customer.fullname ?? customer.full_name ?? "-"}</span>
                                             </div>
                                         </td>
                                         <td className="px-5 py-4 text-sm">
-                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getLoyaltyStyle(customer.Loyalty)}`}>
-                                                {customer.Loyalty}
+                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${getLoyaltyStyle(customer.tier || customer.Tier || customer.loyalty || customer.Loyalty)}`}>
+                                                {customer.tier || customer.Tier || customer.loyalty || customer.Loyalty || "-"}
                                             </span>
                                         </td>
                                     </tr>

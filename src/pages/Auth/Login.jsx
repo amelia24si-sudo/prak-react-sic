@@ -1,12 +1,12 @@
-// 1. TAMBAHKAN SEMUA IMPORT INI
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { BsFillExclamationDiamondFill } from "react-icons/bs";
 import { ImSpinner2 } from "react-icons/im";
+import { useAuth } from "../../context/useAuth.jsx";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [dataForm, setDataForm] = useState({
@@ -26,36 +26,33 @@ export default function Login() {
         e.preventDefault();
 
         setLoading(true);
-        setError(false);
+        setError("");
 
-        axios
-            .post("https://dummyjson.com/user/login", {
-                username: dataForm.email, // API DummyJSON menggunakan key 'username'
-                password: dataForm.password,
-            })
-            .then((response) => {
-                if (response.status !== 200) {
-                    setError(response.data.message);
-                    return;
-                }
-                navigate("/");
-            })
-            .catch((err) => {
-                if (err.response) {
-                    setError(err.response.data.message || "An error occurred");
-                } else {
-                    setError(err.message || "An unknown error occurred");
-                }
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        const { error } = await login(dataForm.email, dataForm.password);
+
+        if (error) {
+            setError(error.message || "Login gagal. Periksa kembali email dan kata sandi.");
+            setLoading(false);
+            return;
+        }
+
+        navigate("/");
+        setLoading(false);
     };
 
+    const isUnconfirmedError = error?.toLowerCase().includes("belum dikonfirmasi") || error?.toLowerCase().includes("email not confirmed");
+
     const errorInfo = error ? (
-        <div className="flex items-center p-5 mb-5 text-sm font-light text-gray-600 bg-red-200 rounded">
-            <BsFillExclamationDiamondFill className="text-lg text-red-600 me-2" />
-            {error}
+        <div className="flex flex-col p-5 mb-5 text-sm font-light text-gray-600 bg-red-200 rounded">
+            <div className="flex items-center gap-2">
+                <BsFillExclamationDiamondFill className="text-lg text-red-600" />
+                <span>{error}</span>
+            </div>
+            {isUnconfirmedError && (
+                <div className="mt-3 text-xs text-gray-700">
+                    Pastikan Anda sudah mengklik tautan verifikasi dari email. Jika belum menerima email, cek folder spam atau tunggu beberapa menit.
+                </div>
+            )}
         </div>
     ) : null;
 
@@ -81,12 +78,14 @@ export default function Login() {
                         Username / Email
                     </label>
                     <input
-                        type="text"
+                        type="email"
                         id="email"
                         name="email"
+                        value={dataForm.email}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-50 placeholder-gray-400"
                         placeholder="Email"
+                        required
                     />
                 </div>
                 <div className="mb-6">
@@ -97,9 +96,11 @@ export default function Login() {
                         type="password"
                         id="password"
                         name="password"
+                        value={dataForm.password}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-50 placeholder-gray-400"
                         placeholder="********"
+                        required
                     />
                 </div>
                 <button

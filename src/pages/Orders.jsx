@@ -1,18 +1,77 @@
+import { useEffect, useState } from "react";
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign, FaCalendarAlt } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
-import ordersData from "../assets/orders.json";
+import { ordersAPI } from "../services/supabaseService.js";
 import Container from "../components/Container";
 import Card from "../components/Card";
 import Table from "../components/Table";
 
 export default function Orders() {
-    // Menghitung statistik berdasarkan data JSON
-    const totalOrders = ordersData.length;
-    const completedOrders = ordersData.filter(o => o.Status === "Completed").length;
-    const pendingOrders = ordersData.filter(o => o.Status === "Pending").length;
-    const cancelledOrders = ordersData.filter(o => o.Status === "Cancelled").length;
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    // Helper fungsi untuk warna status
+    useEffect(() => {
+        const loadOrders = async () => {
+            setLoading(true);
+            const { data, error } = await ordersAPI.fetchOrders();
+            if (error) {
+                setError(error.message || "Gagal memuat pesanan.");
+                setOrders([]);
+            } else {
+                setError("");
+                setOrders(data || []);
+            }
+            setLoading(false);
+        };
+
+        loadOrders();
+    }, []);
+
+    const [form, setForm] = useState({ status: 'Pending', total_amount: '' });
+
+    const getOrderStatus = (order) => {
+        return order.status || order.Status || 'Unknown';
+    };
+
+    const totalOrders = orders.length;
+    const completedOrders = orders.filter((o) => getOrderStatus(o) === 'Completed').length;
+    const pendingOrders = orders.filter((o) => getOrderStatus(o) === 'Pending').length;
+    const cancelledOrders = orders.filter((o) => getOrderStatus(o) === 'Cancelled').length;
+
+    const normalizeOrderValue = (order, key) => {
+        if (key === 'id') return order.id ?? order['Order ID'] ?? '-';
+        if (key === 'created_at') return order.created_at ?? order['Created At'] ?? '-';
+        if (key === 'total_amount') return order.total_amount ?? order['Total Amount'] ?? 0;
+        if (key === 'status') return getOrderStatus(order);
+        return '';
+    };
+
+    const handleFormChange = (event) => {
+        const { name, value } = event.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleCreateOrder = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setError('');
+
+        const { data, error } = await ordersAPI.createOrder({
+            status: form.status,
+            total_amount: Number(form.total_amount) || 0,
+        });
+        if (error) {
+            setError(error.message || 'Gagal menambahkan pesanan.');
+            setLoading(false);
+            return;
+        }
+
+        setOrders([data, ...orders]);
+        setForm({ status: 'Pending', total_amount: '' });
+        setLoading(false);
+    };
+
     const getStatusStyle = (status) => {
         switch (status) {
             case 'Completed': return 'bg-green-100 text-green-800';
@@ -21,11 +80,11 @@ export default function Orders() {
             default: return 'bg-gray-100 text-gray-800';
         }
     };
-    const headers = ["orderID", "Customer", "Date", "Total Price", "Status"]
+    const headers = ["Order ID", "Created At", "Total Amount", "Status"]
 
     return (
         <Container id="orders-container">
-            <PageHeader title="Order Management" breadcrumb1={`Mengelola ${ordersData.length} pesanan`} breadcrumb2="Add New Order" />
+            <PageHeader title="Order Management" breadcrumb1={`Mengelola ${totalOrders} pesanan`} breadcrumb2="Add New Order" />
 
             {/* Statistik Ringkas */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -79,31 +138,61 @@ export default function Orders() {
             </div>
 
             {/* Tabel Orders dengan Scroll Independen */}
-            <div className="overflow-x-auto bg-white rounded-lg shadow">
+            <div className="overflow-x-auto bg-white rounded-lg shadow mb-6">
                 <div className="overflow-x-auto overflow-y-auto max-h-[390px]">
                     <Table headers={headers}>
-                        {ordersData.map((order) => (
-                            <tr key={order["Order ID"]} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                                <td className="px-5 py-4 text-sm font-bold text-blue-600">#{order["Order ID"]}</td>
-                                <td className="px-5 py-4 text-sm text-gray-800 font-medium">{order["Customer Name"]}</td>
-                                <td className="px-5 py-4 text-sm text-gray-600">
-                                    <div className="flex items-center">
-                                        <FaCalendarAlt className="mr-2 opacity-50" />
-                                        {order["Order Date"]}
-                                    </div>
-                                </td>
-                                <td className="px-5 py-4 text-sm font-semibold text-gray-900">
-                                    Rp {order["Total Price"].toLocaleString('id-ID')}
-                                </td>
+                        {orders.map((order) => (
+                            <tr key={normalizeOrderValue(order, 'id')} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td className="px-5 py-4 text-sm font-bold text-blue-600">#{normalizeOrderValue(order, 'id')}</td>
+                                <td className="px-5 py-4 text-sm text-gray-800 font-medium">{normalizeOrderValue(order, 'created_at')}</td>
+                                <td className="px-5 py-4 text-sm font-semibold text-gray-900">Rp {Number(normalizeOrderValue(order, 'total_amount') ?? 0).toLocaleString('id-ID')}</td>
                                 <td className="px-5 py-4 text-sm">
-                                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusStyle(order.Status)}`}>
-                                        {order.Status}
+                                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusStyle(normalizeOrderValue(order, 'status'))}`}>
+                                        {normalizeOrderValue(order, 'status')}
                                     </span>
                                 </td>
                             </tr>
                         ))}
                     </Table>
                 </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-xl font-semibold mb-4">Tambah Pesanan Baru</h3>
+                {error && <div className="mb-4 text-sm text-red-600">{error}</div>}
+                <form onSubmit={handleCreateOrder} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Total Amount</label>
+                        <input
+                            type="number"
+                            name="total_amount"
+                            value={form.total_amount}
+                            onChange={handleFormChange}
+                            className="w-full rounded-xl border border-gray-200 p-3"
+                            min="0"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Status Pesanan</label>
+                        <select
+                            name="status"
+                            value={form.status}
+                            onChange={handleFormChange}
+                            className="w-full rounded-xl border border-gray-200 p-3"
+                        >
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-emerald-600 text-white rounded-xl py-3 hover:bg-emerald-700"
+                    >
+                        Tambah Pesanan
+                    </button>
+                </form>
             </div>
         </Container>
     );

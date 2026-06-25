@@ -15,15 +15,13 @@ export default function PageHeader(props) {
                 </div>
             </div>
 
-            <div id="action-button">
-                <Button
-                    to="/400" 
-                    id="add-button" 
-                    type="success"
-                >
-                    <FaPlus className="mr-2 inline" /> {props.breadcrumb2}
-                </Button>
-            </div>
+            {props.to && (
+                <div id="action-button">
+                    <Button to={props.to} id="add-button" type="success">
+                        <FaPlus className="mr-2 inline" /> {props.breadcrumb2}
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }

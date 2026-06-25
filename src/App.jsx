@@ -10,6 +10,7 @@ import Loading from './components/Loading';
 import Products from './pages/Products';
 import Fiturxyz from './pages/Fiturxyz';
 import Notes from './pages/Notes';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 
 // 2. Lazy Load untuk Halaman Utama & Auth (Default Exports)
@@ -22,6 +23,8 @@ const Login = React.lazy(() => import("./pages/Auth/Login"));
 const Register = React.lazy(() => import("./pages/Auth/Register"));
 const Forgot = React.lazy(() => import("./pages/Auth/Forgot"));
 const Fiturexyz = React.lazy(() => import("./pages/Fiturxyz"));
+const DashboardMember = React.lazy(() => import("./pages/DashboardMember"));
+const ProductsAdmin = React.lazy(() => import("./pages/ProductsAdmin"));
 
 // 3. Lazy Load untuk Halaman Error
 // NotFound menggunakan default export
@@ -40,12 +43,14 @@ export default function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/customers" element={<ProtectedRoute allowRoles={["Admin"]}><Customers /></ProtectedRoute>} />
+          <Route path="/products" element={<ProtectedRoute allowRoles={["Admin"]}><Products /></ProtectedRoute>} />
+          <Route path="/products-admin" element={<ProtectedRoute allowRoles={["Admin"]}><ProductsAdmin /></ProtectedRoute>} />
+          <Route path="/products/:id" element={<ProtectedRoute allowRoles={["Admin"]}><ProductDetail /></ProtectedRoute>} />
           <Route path="/components" element={<Components />} />
           <Route path="/fiturxyz" element={<Fiturxyz/>} />
           <Route path="/notes" element={<Notes/>} />
+          <Route path="/dashboard-member" element={<ProtectedRoute allowRoles={["Member"]}><DashboardMember /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
           <Route path="400" element={<BadRequest />} />
           <Route path="401" element={<Unauthorized />} />
